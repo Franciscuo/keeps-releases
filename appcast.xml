@@ -1,0 +1,16 @@
+<?xml version="1.0" standalone="yes"?>
+<rss xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle" version="2.0">
+    <channel>
+        <title>Keeps</title>
+        <item>
+            <title>0.2.0</title>
+            <pubDate>Sat, 08 Aug 2026 07:06:04 +0000</pubDate>
+            <link>https://franciscuo.github.io/keeps-releases/</link>
+            <sparkle:version>163</sparkle:version>
+            <sparkle:shortVersionString>0.2.0</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
+            <sparkle:hardwareRequirements>arm64</sparkle:hardwareRequirements>
+            <enclosure url="https://github.com/Franciscuo/keeps-releases/releases/download/v0.2.0/Keeps.dmg" length="28086854" type="application/octet-stream" sparkle:edSignature="R0+VZlKxw1r7hh7xZC64iLGnThqhw+6Yj+MjBwmO5Hk98ZfiQNxnsdZFM3Rg++I9+0XU4QgdiAKLGMhDeAS1Bg=="/>
+        </item>
+    </channel>
+</rss>
