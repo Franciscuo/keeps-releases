@@ -1,0 +1,80 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Keeps</title>
+<style>
+  :root {
+    color-scheme: light dark;
+    --bg: #fbfbfa; --fg: #17171a; --dim: #6b6b73;
+    --line: #e4e4e1; --accent: #17171a; --accent-fg: #fbfbfa;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #17171a; --fg: #f2f2f0; --dim: #8f8f98;
+      --line: #2c2c31; --accent: #f2f2f0; --accent-fg: #17171a;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 4rem 1.5rem; background: var(--bg); color: var(--fg);
+    font: 16px/1.6 ui-sans-serif, -apple-system, system-ui, sans-serif;
+    display: flex; justify-content: center;
+  }
+  main { width: 100%; max-width: 34rem; }
+  h1 { font-size: 1.5rem; letter-spacing: -0.02em; margin: 0 0 0.5rem; }
+  p { color: var(--dim); margin: 0 0 1.5rem; }
+  .get {
+    display: inline-block; padding: 0.7rem 1.4rem; border-radius: 0.5rem;
+    background: var(--accent); color: var(--accent-fg);
+    text-decoration: none; font-weight: 600;
+  }
+  .meta { font-size: 0.85rem; color: var(--dim); margin: 0.75rem 0 0; }
+  section { border-top: 1px solid var(--line); margin-top: 3rem; padding-top: 1.5rem; }
+  h2 { font-size: 0.95rem; margin: 0 0 0.75rem; }
+  ol { color: var(--dim); margin: 0; padding-left: 1.2rem; }
+  li { margin-bottom: 0.4rem; }
+  code {
+    font: 0.85em ui-monospace, SFMono-Regular, Menlo, monospace;
+    background: var(--line); padding: 0.1em 0.35em; border-radius: 0.25rem;
+  }
+</style>
+
+<main>
+  <h1>Keeps</h1>
+  <p>Your Claude Code sessions, on your phone. A menu-bar app for macOS.</p>
+
+  <a class="get" href="https://github.com/Franciscuo/keeps-releases/releases/latest/download/Keeps.dmg">
+    Download for Mac
+  </a>
+  <p class="meta" id="meta">Apple silicon and Intel · requires macOS 14 or later</p>
+
+  <section>
+    <h2>First launch</h2>
+    <p>
+      Keeps is signed but not notarized by Apple, so macOS refuses the first
+      launch. This is the expected path, not a broken download:
+    </p>
+    <ol>
+      <li>Open the <code>.dmg</code> and drag Keeps to Applications.</li>
+      <li>Open it once. macOS will refuse.</li>
+      <li>Go to <strong>System Settings → Privacy &amp; Security</strong>, scroll
+        down, and click <strong>Open Anyway</strong>.</li>
+    </ol>
+  </section>
+</main>
+
+<script>
+  // The download link above is static and always correct — this only fills in
+  // which version it currently points at. If the API is rate-limited or the
+  // fetch fails, the page is still fully usable, so it fails silently.
+  fetch('https://api.github.com/repos/Franciscuo/keeps-releases/releases/latest')
+    .then(r => r.ok ? r.json() : Promise.reject(r.status))
+    .then(r => {
+      const when = new Date(r.published_at).toLocaleDateString(undefined, {
+        year: 'numeric', month: 'long', day: 'numeric',
+      });
+      document.getElementById('meta').textContent =
+        `${r.tag_name} · ${when} · Apple silicon and Intel · requires macOS 14 or later`;
+    })
+    .catch(() => {});
+</script>
